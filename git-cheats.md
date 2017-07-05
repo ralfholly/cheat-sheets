@@ -4,7 +4,9 @@ Git Cheat Sheet
 ## Undoing/Changing
 
   * Undo last commit, move to staging area
+    ```
     git reset --soft HEAD^
+    ```
 
   * Undo last commit, remove from history (before push)
     git reset --hard HEAD^
