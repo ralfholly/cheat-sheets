@@ -1,0 +1,127 @@
+GENERAL
+
+    x // y          # Integer (truncating) devision.
+    x is y          # Object identity.
+    x in S          # Membership test.
+    len(S)          # Length.
+    min(S), max(S)  # Minimum, maximum.
+    del x           # Delete x from container.
+    for x in S:     # Iteration.
+    S[i:j]          # Slice from [i, j)
+    S[i:j:k]        # Slice from [i, j), every kth element.
+    S[:]            # Flat copy of X.
+    r'mytext\b'     # Raw text literal.
+    "%s %4.2f" % ("hello", 42.0)            # String formatting with expression
+    "{0} {1:4.2f}".format ("hello", 42.0)   # String formatting with method
+    if __name__ == "__main__":  # If script is executed.
+    sys.argv        # Program arguments.
+    a if b else c   # Ternary operator.
+    ord('*')        # ASCII value.
+    chr(42)         # ASCII letter.
+    random.randint(a, b) # Random integer from [a;b].
+    random.choice(S)     # Return random element from sequence.
+    sorted(S)       # Returns a sorted *array* of input sequence.
+    reversed(S)     # Returns an iterator over reversed sequence.
+    
+    TODO: keyword arguments
+
+
+LISTS
+
+    L = [1, 2, 3]    # Typical.
+    L = list('spam') # Create list via type conversion.
+    L = [ x ** 2 for x in range(0, 11) ] # List comrehension.
+    G = ( x ** 2 for x in range(0, 11) ) # List generator.
+    L.append(x)      # Appends object x to end of list.
+    L.extend(I)      # Appends all elems of iterable to end of list.
+    L += I           # dito, ie. L += [4, 5, 6] appends 4, 5, 6.
+
+
+SETS
+
+    S = {1, 2, 3}    # Set.
+    S = set()        # Empty set.
+    G = { x ** 2 for x in range (0, 11) } # Set comprehension.
+
+
+DICTIONARIES
+
+    D = {'one':1, 'two':2} # Dictionary.
+    D = dict(one=1, two=2) # dito.
+    D = {}           # Empty dictionary (not empty set!).
+    D = { c:ord(c) for c in "hello" } # Dictionary comrehension.
+
+    D[k]             # Get value by key. Throws if key not present.
+    D.get(k)         # dito, but return None if key not present.
+    D.get(k, d)      # dito, but return d if key not present.
+    D.setdefault(k, d) # dito, but also set D[k] = d if key not present.
+    k in D           # True if key in dictionary.
+    D.keys()         # List of keys.
+    D.values()       # List of values.
+    D.items()        # List of (key, value) tuples.
+
+
+TUPLES
+
+    T = (1, 2, 3)    # Tuple.
+    T = tuple(1, 2, 3) # dito.
+    T = 1, 2, 3      # dito.
+    for i in 1,2,3 : # Tuple used in for loop.
+        print i
+    T = ()           # Empty tuple.
+    T = (1,)         # Single element tuple.
+    T[42]            # 43rd tuple element.
+    T[42] = 42       # Error: item assignment not supported.
+
+
+FILE I/O
+
+    Textmode: \n <-> platform-specific newline conversion.
+    Binary mode: no newline conversion ("rb" or "wb").
+        
+    r = open("foo", "r")    # Open for read (text mode).
+    r.read()                # Reads whole file.
+    r.readline()            # Reads singe line.
+    for l in r:             # Iterates line-wise over file.
+
+    w = open("foo", "w")    # Open for write (text mode).
+    w.write(s)              # Writes string to file (no newline at end).
+    w.write("\n")           # Writes newline to file
+
+    with open('output.txt', 'w') as f: # Context manager.
+        f.write('Hi there!')
+
+REGEX
+
+    mobj = re.match('foo\w+', text)   # Matches pattern at/from beginning of text.
+    mobj = re.search('foo\w+', text)  # Matches pattern anywhere in text.
+    mobj.group(0)           # Full match.
+    mobj.group(1)           # First () group.
+    mobj = re.search('foo\w+', text, re.I) # Case insensitive search.
+
+    With compiled pattern objects:
+    pobj = re.compile('foo\w+') # Compiles a pattern object.
+    mobj = pobj.match(text)     # Matches contained pattern in text.
+    mobj = pobj.search(text)    # Searches contained pattern in text.
+
+
+CLASSES
+
+    TODO
+
+UNIT TESTS
+    import unittest
+    class TestStringMethods(unittest.TestCase):
+      def test_upper(self):
+          self.assertEqual('foo'.upper(), 'FOO')
+          self.assertEqual(s.split(), ['hello', 'world'])
+          # check that s.split fails when the separator is not a string
+          with self.assertRaises(TypeError):
+              s.split(2)
+    if __name__ == '__main__':
+        unittest.main()
+
+MISC
+    import pdb; pdb.set_trace()   # Start debugger
+
+

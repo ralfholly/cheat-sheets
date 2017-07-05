@@ -1,0 +1,104 @@
+GENERAL
+
+    Process of replacing template parameters with concrete types is called instantiation
+    Instantiation is done by compiler, specialization is done by programmer.
+    Primary template: the general template, the one without specializations
+    Explicit specialization == full specialization, that is, all template parameters specified.
+    Partial specialization: Some template parameters specified.
+
+
+FUNCTION TEMPLATES
+
+    Automatic argument deduction
+        Can provide explicit argument types:
+            max<double>(7, 42); 
+
+        Tip: If deduction not possible, put non-deducible parameters first,
+        such that remaining arguments still can be automatically deduced:
+            template<typename A, typename B, typename C> A foo(B b, C c); // Use as: foo<int>(42.0, true)
+
+    No default template arguments for function templates
+
+    Specialization:
+        template<typename T> void sort(Array<T>& v) { ... }; // Primary template.
+        template<> void sort<char*>(Array<char*>&); // Specialization for char*.
+
+        No partial specialization for function templates!
+
+    Overloading:
+
+        inline int const& max (int const& a, int const& b);
+        template <typename T> inline T const& max (T const& a, T const& b);
+        template <typename T> inline T const& max (T const& a, T const& b, T const& c);
+
+        non-template overload preferred, unless there is a better templated match
+
+        max<>('a', 42) // Deduct automatically, but always take a templated version
+
+        SFINAE:
+            If an invalid argument or return type is formed during the instantiation of a function template, 
+            the instantiation is removed from the overload resolution set instead of causing a compilation error
+
+            struct Test { typedef int foo; };
+            template <typename T> void f(typename T::foo) {} // Definition #1
+            template <typename T> void f(T) {}               // Definition #2
+            f<Test>(10); // Call #1.
+            f<int>(10);  // Call #2. Without error (even though there is no int::foo) thanks to SFINAE.
+
+
+CLASS TEMPLATES
+
+    Member function definition:
+        template<typename T> void Stack<T>::push(T const &) { ... }
+
+    Spezialization:
+        Similar to function template overloading
+        Member function definition:
+            template<> class Stack<std::string> { ... }
+            void Stack<std::string>::pop() { ... }
+
+        Partial specialization:
+            template<typename T1, typename T2> class MyClass { ... } // Primary template.
+            template<typename T> class MyClass<T, T> { ... }
+            template<typename T> class MyClass<T, int> { ... }
+            template<typename T1*, typename T2*> class MyClass<T1*, T2*> { ... }
+
+    Default template arguments supported.
+
+    Non-type template parameters:
+        Constant integrals (incl. enums) or pointer/reference to object with external linkage
+        Pointer-to-member constant
+
+    'typename' required whenever a name that depends on a template parameter is a type
+
+    Qualify any symbol that is declared in a base that is somehow dependent on a template parameter with this-> or Base<T>::. 
+
+    Template template parameters:
+        Use case: avoid respecifying 'int' as in Stack<int,std::vector<int> > vStack;
+        template <typename T, template <typename ELEM> class CONT = std::deque>  // ELEM can be left out.
+
+    Member function templates cannot be virtual
+
+
+ENABLE_IF IDIOM
+
+    template <bool, typename T = void> struct enable_if {};
+    template <typename T> struct enable_if<true, T> { typedef T type; };
+
+    Used together with SFINAE to implement a compile-time switch based on a property:
+        template <typename T>
+        void do_stuff(typename enable_if<std::is_integral<T>::value, T>::type &t) {
+            // An implementation for integral types (int, char, unsigned, etc.)
+        }
+
+        template <typename T>
+        void do_stuff(typename enable_if<std::is_class<T>::value, T>::type &t) {
+            // An implementation for class types
+        }
+
+
+OTHER
+
+    double d; int i; // Built-in types not initialized.
+    double d = double(); int i = int(); // Now zero-initialized.
+

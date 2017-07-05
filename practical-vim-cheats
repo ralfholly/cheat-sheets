@@ -1,0 +1,124 @@
+# Start Vim without .vimrc file but in 'nocompatible' mode.
+vim -u NONE -N
+
+'s' command deletes character under cursor and enters insert mode.
+
+'db' deletes backward, 'dw' deletes forward.
+
+i_ctrl-h deletes back one character (backspace).
+
+i_ctrl-o switch to 'normal' insert mode.
+
+??? i_ctrl-r_ctrl-p pastes with indentation fixed.
+
+Use the expression register '=' for quick math.
+
+i_ctrl-k inserts digraphs. See 'help-digraph-table'.
+
+'Vr-' replaces all characters in line with '-'
+
+Use '0' to address 'top of file'.
+
+---
+
+Copy line(s) with ':t' command without having to move the cursor.
+
+Move line(s) with ':m' command without having to move the cursor.
+
+Repeat last ex command with '@:'
+
+Use 'normal' command on a range, e. g. ':%normal A;'
+
+Use 'Ctrl-d' completion to show a list of possible completions
+
+'Ctrl-r Ctrl-a' gets WORD under cursor ('Ctrl-r Ctrl-w' gets word under cursor)
+
+':update' writes file only if buffer has changed.
+
+'Ctrl-f' switches from command-line mode to command-line window.
+
+':read !{cmd}' puts output from cmd in buffer.
+
+':write !{cmd}' uses buffer contents as standard input for cmd.
+
+---
+
+TIP: sort -k# selects key # for sorting, -t<c> selects char 'c' as separator.
+
+':args **/*.js **/*.css' globs recursively and fills args list.
+
+':args `cat .chapters`' populates args list with content of .chapters file.
+
+'Ctrl-wT' moves current window into a new tab page.
+
+':w !sudo tee % > /dev/null' reopen file as super user.
+
+'gp and gP' are just like 'p and P' but put cursor at end of pasted text.
+
+---
+
+'@@' replay last macro.
+
+'argdo normal @a' execute macro on all files in args list.
+
+'y$' yank excluding new line character.
+
+'\x' hex character class for regular expressions.
+
+Use '\v' for very magic searches.
+
+Use '\V' for very non-magic (literal) searches.
+
+# Match without capturing into \1, \2... registers by using a '%':
+'/\v%(And|D)rew Neil'
+
+# Zero-width expressions, lookaround expressions:
+'/Practical \zsVim'    # Practical is part of pattern, but only Vim is matched.
+
+'/<Enter>' does a forward search, reusing the previous search pattern.
+
+'Ctrl-r Ctrl-w' autocompletes search field based on the current preview match.
+
+'%s///gn' count number of matches of current search pattern.
+
+':vim // %' creates a quickfix list containing all matches of current search pattern in current file.
+
+---
+
+'/foo/e' searches 'foo' and places cursor at the end of searched text ('/foo/e+3' three chars after end).
+
+'/foo/;/bar' searches first for 'foo' then from the match on for 'bar'.
+
+'%s//\=@0/g' replace with Vim expression (here: with contents of register 0).
+
+':&&' repeats last substitute on range.
+
+'g&' is a handy shortcut for ':%gg'.
+
+'%s/\d\+/\=submatch(0)-1/g' decrements all numbers.
+
+':argdo %s/foo/bar/ge' replace 'foo' with 'bar' across all args without complaining.
+
+'qaq' clears the contents of register 'a'.
+
+':g/TODO/yank A' puts all lines containing 'TODO' into 'a' register.
+
+':g/^{/.+1,/^}/-1 sort' sort all lines within a '{' .. '}' block.
+
+---
+
+':tnext', ':tfirst', ':tlast' navigate tag matches (after 'Ctrl-]')
+
+'##' for vimgrep: expands to all files in the args list.
+
+'Ctrl-x Ctrl-l' line-wise completion.
+
+--- 
+
+'g*' forward search like 'g' but without word boundaries.
+
+'g Ctrl-g' print file info.
+
+'g<' show last page of output of last command (useful for hit-enter situations)
+
+

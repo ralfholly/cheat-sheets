@@ -1,0 +1,30 @@
+gdb -tui        # Start in TUI mode.
+ctrl-x-o        # Toggle windows in TUI mode.
+
+run             # Run program with previous args.
+make            # Run make.
+
+cond n expr     # Set conditional expression on breakpoint n.
+info break      # Show breakpoints.
+delete n        # Delete breakpoint n.
+disable n       # Disable breakpoint n.
+enable n        # Enable breakpoint n.
+
+bt              # Show backtrace.
+frame n         # Select frame n.
+
+info locals     # Local variables of current frame.
+info args       # Arguemens of current frame.
+
+until loc       # Run until location.
+finish          # Finish current stack frame.
+
+p/x expr        # Print expression in hex.
+x/3b adr        # Print three bytes from adr.
+display /x expr # Auto-display expression in hex.
+display         # Display all enabled expressions.
+enable disp n   # Enable display of n.
+disable disp n  # Disable display of n.
+undisplay n     # Remove display of n.
+info display    # Show all displays as list.
+
