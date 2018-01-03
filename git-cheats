@@ -71,6 +71,22 @@ COMMIT RANGES
 
     http://stackoverflow.com/questions/7251477/what-are-the-differences-between-double-dot-and-triple-dot-in-git-dif
 
+    --(3)--(4)--(5)--(6)  master/
+            \
+             +--(7)--(8)  dev/
+
+    git log master             3, 4, 5, 6
+    git log master dev         3, 4, 5, 6, 7, 8    # Superset
+
+    git log ^master dev        7, 8                # On dev, but not on master
+    git log master..dev        7, 8                # dito. IMPORTANT!
+    git merge-base master dev  4                   # Point where branches diverge
+    git log master...dev       4, 5, 6, 7, 8       # ALL changes since branch point
+
+    git diff master dev        git diff (6) (8)    # Diff tips of both branches
+    git diff master..dev       git diff (6) (8)    # dito
+    git diff master...dev      git diff (4) (8)    # Find branch point, then diff against tip of dev. Important!
+
     GIT LOG
 
         # Nice information on git commit range specifiers:
@@ -104,7 +120,7 @@ MERGING
     # Solving conflicts
     git checkout --ours filename.c
     git checkout --theirs filename.c
-    
+
     # Interactive merging with beyond compare
     git mergetool -t bc3
 
@@ -115,6 +131,9 @@ MERGING
 
     # Undo last merge.
     git reset --hard ORIG_HEAD
+
+    # List all branches that are FULLY merged in <branch>
+    git branch -a --merged <branch>
 
 RESET VS. CHECKOUT
 
