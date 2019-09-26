@@ -172,6 +172,25 @@ ANCESTOR SPECIFIERS
     I = F^   = B^3^    = A^^3^
     J = F^2  = B^3^2   = A^^3^2
 
+BRANCHES
+
+    local branch
+        A branch that only exists in the local repository
+        E. g. my-local-branch
+
+    remote branch
+        A branch that exists in a remote repository
+
+    remote tracking branch
+        A (read-only) local branch that exists to track a remote branch.
+        Local representative of the branch in the remote repository.
+        E. g. origin/master
+
+    tracking branch
+        A local, modifiable branch that tracks a remote branch.
+        Gets updates from remote tracking branch.
+        E. g. master
+
 MISCELLANEOUS
 
 # Show file on a branch other than current branch:
