@@ -191,6 +191,27 @@ BRANCHES
         Gets updates from remote tracking branch.
         E. g. master
 
+GIT RESET
+                            reset --hard HEAD~
+   +-------------------------------------------------------------------+
+   |                                   reset --mixed HEAD~             |
+   |                       +-------------------------------------------+
+   |                       |                      reset --soft HEAD~   |
+   |                       |                     +---------------------+
+   |  reset --hard HEAD    |                     |                     |
+   |   alt: checkout .     | reset --mixed HEAD  |                     |
+   +---------------------+ +-------------------+ +                     |
+   |                     | |                   | |                     |
+   v                     | v                   | v                     |
+(HEAD~)            (WORKING COPY)            (INDEX)                (HEAD)
+   |                     ^ |                    ^                      ^
+   |                     | |                    |                      |
+   +---------------------+ +--------------------+                      |
+   |    "modify file"               add                                |
+   |                                                                   |
+   +-------------------------------------------------------------------+
+                               reset HEAD@{...}
+
 MISCELLANEOUS
 
 # Show file on a branch other than current branch:
