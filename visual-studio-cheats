@@ -1,0 +1,17 @@
+CTRL SHIFT B    Build solution
+CTRL F7         Compile current file only
+
+ALT *           Go to current PC
+F5              Start debugging, continue
+CTRL SHIFT F5   Restart debugging
+
+F9              Toggle breakpoint
+CTRL ,          Search anything
+
+CTRL -          Navigate back in history
+CTRL SHIFT -    Navigate forward in history
+
+CTRL K CTRL O   Toogle header/code
+
+CTRL SHIFT F11  Toggle VsVim
+
