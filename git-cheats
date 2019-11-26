@@ -214,35 +214,70 @@ GIT RESET
 
 MISCELLANEOUS
 
-# Show file on a branch other than current branch:
-git show hsfz-experiments:Components/bsw/src/HSFZSystem.cpp
+    # Show file on a branch other than current branch:
+    git show hsfz-experiments:Components/bsw/src/HSFZSystem.cpp
 
-# Show commits that are only on branch and not on master
-git cherry master hsfz-experiments
+    # Show commits that are only on branch and not on master
+    git cherry master hsfz-experiments
 
-# Find common ancestor for two branches
-git merge-base master hsfz-experiments
+    # Find common ancestor for two branches
+    git merge-base master hsfz-experiments
 
-# Stage deleted/modified files
-git add -u
+    # Stage deleted/modified files
+    git add -u
 
-# Stage all files (new, deleted, modified)
-git add -A
+    # Stage all files (new, deleted, modified)
+    git add -A
 
-# Remember: HEAD is what you look at currently. HEAD is a reference to a reference and points at what is currently checked-out (eg. master).
-# Nice tutorial on refs: https://people.gnome.org/~federico/news-2008-11.html#pushing-and-pulling-with-git-1
+    # Remember: HEAD is what you look at currently. HEAD is a reference to a reference and points at what is currently checked-out (eg. master).
+    # Nice tutorial on refs: https://people.gnome.org/~federico/news-2008-11.html#pushing-and-pulling-with-git-1
 
-# Move last commit on branch of its own.
-git branch new_branch
-git reset --hard HEAD^  # Commit only lost on master, not new_branch.
-git checkout new_branch
+    # Move last commit on branch of its own.
+    git branch new_branch
+    git reset --hard HEAD^  # Commit only lost on master, not new_branch.
+    git checkout new_branch
 
-# Compress repo.
-git gc
+    # Compress repo.
+    git gc
 
-# Delete remote branch (need to delete local branch as well)
-git push origin --delete refactor/mc_4_refactor_foeslave
+    # Delete remote branch (need to delete local branch as well)
+    git push origin --delete refactor/mc_4_refactor_foeslave
 
-# Delete local branch
-git branch -d refactor/mc_4_refactor_foeslave
+    # Delete local branch
+    git branch -d refactor/mc_4_refactor_foeslave
+
+MERGING
+
+     First parent (M^1): "merge-into commit"
+    Second parent (M^2): "merge-from commit"
+
+    M   cbc419c - (HEAD -> topic) Merge branch 'master' into topic
+    |\
+    | * add27f6 - Changes on master (M^2)
+    * | 90829e2 - Changes on topic (M^1)
+    |/
+    * a607706 - Changes on topic
+    * cc31e66 - Changes on topic
+    |
+
+    # To see what really changed during a merge:
+    git diff M^1..M
+
+    # Only shows a 'combined' diff (files changed in both branches)
+    git show M
+
+    # Combined diffs show only files modified in both branches
+    # because this is where conflicts may occur.
+     First column: diff merge-base..M^1
+    Second column: diff merge-base..M^2
+
+    @@@ -7,4 -7,4 +7,8 @@@ Tue Nov 12 13:20:17 STD 201
+    This is a line
+    This is a line
+    This is a line
+  ++<<<<<<< HEAD
+   +This line was added on topic
+  ++=======
+  + This line was added on master
+  ++>>>>>>> master
 
